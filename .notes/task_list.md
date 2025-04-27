@@ -24,11 +24,11 @@
 - [ ] Implement loading config from file (YAML/JSON) - *Deferred*
 
 ## Phase 3: Modal Setup
-- [ ] Define `modal.App` in `src/core/modal_setup.py`.
-- [ ] Create base `modal.Image` with Python & system dependencies.
-- [ ] Define `modal.Secret` for Hugging Face token.
-- [ ] Define `modal.Volume` for potential model/data sharing (e.g., `model-cache-volume`).
-- [ ] Test basic Modal connectivity (`modal run src/core/modal_setup.py` with a dummy function).
+- [X] Define `modal.App` in `src/core/modal_setup.py`.
+- [X] Create base `modal.Image` with Python & system dependencies.
+- [X] Define `modal.Secret` for Hugging Face token.
+- [X] Define `modal.Volume` for potential model/data sharing (e.g., `model-cache-volume`).
+- [X] Test basic Modal connectivity (`modal run src/core/modal_setup.py` with a dummy function).
 
 ## Phase 4: Finetuning Implementation
 - [ ] Implement image handling utilities (`resize`, `tile`) in `src/core/finetuning/data_utils.py`.
