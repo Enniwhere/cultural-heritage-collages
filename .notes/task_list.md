@@ -1,25 +1,27 @@
 # Project Task List
 
 ## Phase 1: Project Setup & Core Structure
-- [ ] Initialize project with `uv init`.
-- [ ] Create basic directory structure (`src`, `data`, `tests`, `.notes`).
-- [ ] Set up `pyproject.toml` with basic metadata and Python version (`>=3.10`).
-- [ ] Add core dependencies (`modal`, `typer[all]`, `pydantic`, `pillow`) using `uv add`.
-- [ ] Add Hugging Face dependencies (`diffusers`, `transformers`, `accelerate`, `peft`, `huggingface-hub`, `torch`, `torchvision`) using `uv add`.
-- [ ] Add development dependencies (`pytest`, `ruff`) using `uv add -G dev`.
-- [ ] Configure `ruff` via `pyproject.toml` or `ruff.toml`.
-- [ ] Create initial `README.md`.
-- [ ] Set up basic `.gitignore`.
-- [ ] Perform initial `uv lock` and `uv sync`.
-- [ ] Commit initial project structure.
+- [X] Initialize project with `uv init`.
+- [X] Create basic directory structure (`src`, `data`, `tests`, `.notes`).
+- [X] Set up `pyproject.toml` with basic metadata and Python version (`>=3.10`).
+- [X] Add core dependencies (`modal`, `typer[all]`, `pydantic`, `pillow`) using `uv add`.
+- [X] Add Hugging Face dependencies (`diffusers`, `transformers`, `accelerate`, `peft`, `huggingface-hub`, `torch`, `torchvision`) using `uv add`.
+- [X] Add development dependencies (`pytest`, `ruff`) using `uv add --dev`.
+- [X] Configure `ruff` via `pyproject.toml`.
+- [X] Create initial `README.md`.
+- [X] Set up basic `.gitignore`.
+- [X] Perform initial `uv lock`.
+- [X] Perform initial `uv sync --all-extras --all-groups`.
+- [X] Commit initial project structure.
 
 ## Phase 2: CLI Foundation
-- [ ] Implement basic CLI entry point in `src/cli/main.py` using Typer.
-- [ ] Define `finetune` command structure in `src/cli/commands/finetune.py`.
-- [ ] Define `inpaint` command structure in `src/cli/commands/inpaint.py`.
-- [ ] Set up Pydantic models for `FinetuneConfig` and `InpaintConfig` in `src/config/models.py`.
-- [ ] Integrate basic config loading/validation into CLI commands (reading args, potential config file support).
-- [ ] Add basic logging setup.
+- [X] Implement basic CLI entry point in `src/cli/main.py` using Typer.
+- [X] Define `finetune` command structure in `src/cli/commands/finetune.py`.
+- [X] Define `inpaint` command structure in `src/cli/commands/inpaint.py`.
+- [X] Set up Pydantic models for `FinetuneConfig` and `InpaintConfig` in `src/config/models.py`.
+- [X] Integrate basic config loading/validation into CLI commands (reading args).
+- [X] Add basic logging setup.
+- [ ] Implement loading config from file (YAML/JSON) - *Deferred*
 
 ## Phase 3: Modal Setup
 - [ ] Define `modal.App` in `src/core/modal_setup.py`.
