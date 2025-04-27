@@ -1,0 +1,20 @@
+---
+description: Python packages, virtual environments and project management
+globs: 
+alwaysApply: false
+---
+# Enforce uv for project management
+
+**Description:**
+
+Use `uv` for managing Python dependencies and virtual environments. Avoid using `pip` or `conda` directly for environment management unless absolutely necessary.
+
+**Advice:**
+
+- Initialize your project with `uv init`.
+- Add dependencies with `uv add <package>`.
+- Install dependencies from `pyproject.toml` and `uv.lock` with `uv sync`.
+- Run scripts within the project environment using `uv run <command>`.
+- Generate or update the lockfile with `uv lock`.
+- Check the `uv` documentation for managing projects: https://docs.astral.sh/uv/guides/projects/
+

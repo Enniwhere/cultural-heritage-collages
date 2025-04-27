@@ -1,0 +1,69 @@
+# .cursor-rules.yaml
+# Rules to enforce project best practices
+
+# General Python & Project Structure
+- rule: Enforce uv for project management
+  description: Use `uv` for managing Python dependencies and virtual environments. Avoid using `pip` or `conda` directly for environment management unless absolutely necessary.
+  advice: |
+    Initialize your project with `uv init`.
+    Add dependencies with `uv add <package>`.
+    Install dependencies from `pyproject.toml` and `uv.lock` with `uv sync`.
+    Run scripts within the project environment using `uv run <command>`.
+    Generate or update the lockfile with `uv lock`.
+    Check the `uv` documentation for managing projects: https://docs.astral.sh/uv/guides/projects/
+
+- rule: Use pyproject.toml for metadata and dependencies
+  description: Define project metadata, dependencies, and Python version requirements in `pyproject.toml` according to PEP 621.
+  advice: |
+    Ensure `pyproject.toml` contains at least `[project]`, `name`, `version`, and `dependencies`.
+    Specify Python version constraints using `requires-python`.
+    See the official pyproject.toml guide: https://packaging.python.org/en/latest/specifications/pyproject-toml/
+
+- rule: Keep uv.lock in version control
+  description: The `uv.lock` file ensures reproducible builds across different environments and should be committed to Git.
+  advice: |
+    Always commit changes to `uv.lock` after running `uv lock` or `uv sync`.
+    Do not manually edit `uv.lock`.
+
+# Modal Usage
+- rule: Use Modal for GPU-intensive tasks
+  description: Leverage Modal for running finetuning and inference tasks that require GPU acceleration. Define Modal functions or classes for these operations.
+  advice: |
+    Structure GPU-bound code within `@modal.function` or `@modal.cls` decorators.
+    Use Modal Volumes (`modal.Volume`) for persisting model weights or datasets between runs.
+    Refer to Modal examples for structuring ML workflows, like the Flux finetuning example: https://modal.com/docs/examples/diffusers_lora_finetune
+    Use Modal Secrets (`modal.Secret`) for managing sensitive information like API keys (e.g., Hugging Face token).
+
+- rule: Define dependencies in Modal Images
+  description: Specify Python packages and system dependencies within `modal.Image` definitions to ensure reproducible remote environments.
+  advice: |
+    Use `modal.Image.debian_slim().pip_install(...)` or similar methods to define the environment.
+    Pin dependency versions for stability.
+    Consider using `uv pip install` within `image.run_commands` if complex dependency resolution is needed within the Modal image build.
+
+- rule: Prefer Modal Classes for stateful operations
+  description: Use `modal.cls` with `@modal.enter` for operations that require loading models or setting up resources once per container startup, improving efficiency for inference endpoints.
+  advice: |
+    Load models within the `@modal.enter` method to avoid reloading on every function call.
+    Store the loaded model or resources on `self`.
+    Define inference logic in `@modal.method`.
+
+# Specific Package Usage
+- rule: Use huggingface-hub for model/dataset interactions
+  description: Utilize the `huggingface_hub` library for downloading models, datasets, and interacting with the Hugging Face Hub API.
+  advice: |
+    Use functions like `snapshot_download` for efficient model downloading.
+    Ensure Hugging Face token is properly configured, potentially using Modal Secrets.
+
+# Environment Awareness (WSL/Ubuntu)
+- rule: Be mindful of path formats in WSL
+  description: When interacting with the filesystem, especially when passing paths between Windows and the WSL/Ubuntu environment (e.g., in Modal configurations or scripts), be cautious about path separators (`\` vs `/`) and drive mounting (`/mnt/c/`).
+  advice: |
+    Prefer using `pathlib.Path` in Python for OS-agnostic path manipulation.
+    When defining paths for Modal mounts or configurations that might originate from Windows, ensure they are correctly formatted for the Linux environment inside Modal containers.
+
+# Code Quality
+- rule: Remove unused imports
+  description: Keep code clean by removing any imported modules or names that are not used.
+  advice: |
+    Regularly check and remove unused imports. Tools like `ruff` (which can be run via `uv run ruff check . --fix`) can automate this. 

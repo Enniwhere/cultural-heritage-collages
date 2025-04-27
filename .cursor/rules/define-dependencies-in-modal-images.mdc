@@ -1,0 +1,17 @@
+---
+description: Modal functions and dependencies
+globs: 
+alwaysApply: false
+---
+# Define dependencies in Modal Images
+
+**Description:**
+
+Specify Python packages and system dependencies within `modal.Image` definitions to ensure reproducible remote environments.
+
+**Advice:**
+
+- Use `modal.Image.debian_slim().pip_install(...)` or similar methods to define the environment.
+- Pin dependency versions for stability.
+- Consider using `uv pip install` within `image.run_commands` if complex dependency resolution is needed within the Modal image build.
+

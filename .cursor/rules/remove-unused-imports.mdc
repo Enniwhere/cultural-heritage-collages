@@ -1,0 +1,15 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Remove unused imports
+
+**Description:**
+
+Keep code clean by removing any imported modules or names that are not used.
+
+**Advice:**
+
+- Regularly check and remove unused imports. Tools like `ruff` (which can be run via `uv run ruff check . --fix`) can automate this.
+

@@ -1,0 +1,17 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Prefer Modal Classes for stateful operations
+
+**Description:**
+
+Use `modal.cls` with `@modal.enter` for operations that require loading models or setting up resources once per container startup, improving efficiency for inference endpoints.
+
+**Advice:**
+
+- Load models within the `@modal.enter` method to avoid reloading on every function call.
+- Store the loaded model or resources on `self`.
+- Define inference logic in `@modal.method`.
+

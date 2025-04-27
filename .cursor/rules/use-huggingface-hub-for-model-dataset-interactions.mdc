@@ -1,0 +1,16 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Use huggingface-hub for model/dataset interactions
+
+**Description:**
+
+Utilize the `huggingface_hub` library for downloading models, datasets, and interacting with the Hugging Face Hub API.
+
+**Advice:**
+
+- Use functions like `snapshot_download` for efficient model downloading.
+- Ensure Hugging Face token is properly configured, potentially using Modal Secrets.
+

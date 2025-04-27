@@ -1,0 +1,18 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Use Modal for GPU-intensive tasks
+
+**Description:**
+
+Leverage Modal for running finetuning and inference tasks that require GPU acceleration. Define Modal functions or classes for these operations.
+
+**Advice:**
+
+- Structure GPU-bound code within `@modal.function` or `@modal.cls` decorators.
+- Use Modal Volumes (`modal.Volume`) for persisting model weights or datasets between runs.
+- Refer to Modal examples for structuring ML workflows, like the Flux finetuning example: https://modal.com/docs/examples/diffusers_lora_finetune
+- Use Modal Secrets (`modal.Secret`) for managing sensitive information like API keys (e.g., Hugging Face token).
+

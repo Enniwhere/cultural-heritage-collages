@@ -1,0 +1,16 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Be mindful of path formats in WSL
+
+**Description:**
+
+When interacting with the filesystem, especially when passing paths between Windows and the WSL/Ubuntu environment (e.g., in Modal configurations or scripts), be cautious about path separators (`\` vs `/`) and drive mounting (`/mnt/c/`).
+
+**Advice:**
+
+- Prefer using `pathlib.Path` in Python for OS-agnostic path manipulation.
+- When defining paths for Modal mounts or configurations that might originate from Windows, ensure they are correctly formatted for the Linux environment inside Modal containers.
+

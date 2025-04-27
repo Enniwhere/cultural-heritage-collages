@@ -1,0 +1,16 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Keep uv.lock in version control
+
+**Description:**
+
+The `uv.lock` file ensures reproducible builds across different environments and should be committed to Git.
+
+**Advice:**
+
+- Always commit changes to `uv.lock` after running `uv lock` or `uv sync`.
+- Do not manually edit `uv.lock`.
+

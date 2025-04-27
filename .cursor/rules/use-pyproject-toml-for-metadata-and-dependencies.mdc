@@ -1,0 +1,17 @@
+---
+description: Python metadata and dependencies
+globs: 
+alwaysApply: false
+---
+# Use pyproject.toml for metadata and dependencies
+
+**Description:**
+
+Define project metadata, dependencies, and Python version requirements in `pyproject.toml` according to PEP 621.
+
+**Advice:**
+
+- Ensure `pyproject.toml` contains at least `[project]`, `name`, `version`, and `dependencies`.
+- Specify Python version constraints using `requires-python`.
+- See the official pyproject.toml guide: https://packaging.python.org/en/latest/specifications/pyproject-toml/
+
