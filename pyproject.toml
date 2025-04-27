@@ -1,0 +1,36 @@
+[project]
+name = "cultural-heritage-collages"
+version = "0.1.0"
+description = "CLI tool for LoRA finetuning and image inpainting using Modal."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "accelerate>=1.6.0",
+    "diffusers>=0.33.1",
+    "huggingface-hub>=0.30.2",
+    "modal>=0.74.29",
+    "peft>=0.15.2",
+    "pillow>=11.2.1",
+    "pydantic>=2.11.3",
+    "torch>=2.7.0",
+    "torchvision>=0.22.0",
+    "transformers>=4.51.3",
+    "typer[all]>=0.15.2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+    "ruff>=0.11.7",
+]
+
+# Add ruff configuration
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "PL", "TID"] # Default + imports, pyupgrade, pylint, flake8-tidy-imports
+ignore = []
+
+[tool.ruff.format]
+quote-style = "double"
