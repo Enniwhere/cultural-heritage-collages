@@ -167,7 +167,7 @@ cython_debug/
 .ruff_cache/
 
 # Project specific
-data/output/
+data/
 
 # Modal state
 .modal.state.env
