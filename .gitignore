@@ -171,3 +171,5 @@ data/output/
 
 # Modal state
 .modal.state.env
+
+data/
