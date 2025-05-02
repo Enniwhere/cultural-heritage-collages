@@ -171,3 +171,5 @@ data/
 
 # Modal state
 .modal.state.env
+
+data/
