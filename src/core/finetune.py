@@ -26,9 +26,9 @@ def download_models(config):
 
 @app.function(
     image=image,
-    gpu="A100-80GB",  # fine-tuning is VRAM-heavy and requires a high-VRAM GPU
+    gpu="A100-80GB:2",  # fine-tuning is VRAM-heavy and requires a high-VRAM GPU
     volumes={MODEL_DIR: volume},  # stores fine-tuned model
-    timeout=1800,  # 30 minutes
+    timeout=18000,  # 300 minutes
     secrets=[huggingface_secret]
     + (
         [modal.Secret.from_name("wandb-secret", required_keys=["WANDB_API_KEY"])]
@@ -70,10 +70,7 @@ def train(config):
     print("launching dreambooth training script")
 
     # Override batch size and gradient accumulation for memory reasons
-    train_batch_size = 1
-    gradient_accumulation_steps = 3
-    print(f"Setting train_batch_size={train_batch_size} and gradient_accumulation_steps={gradient_accumulation_steps} to manage memory.")
-
+    output_dir = MODEL_DIR + '/postcards_lora'
     _exec_subprocess(
         [
             "accelerate",
@@ -82,17 +79,18 @@ def train(config):
             "--mixed_precision=bf16",  # half-precision floats most of the time for faster training
             f"--pretrained_model_name_or_path={MODEL_DIR}",
             f"--instance_data_dir={img_path}",
-            f"--output_dir={MODEL_DIR}",
+            f"--output_dir={output_dir}",
             f"--instance_prompt={prompt}",
             f"--resolution={config.resolution}", # Keep original resolution for now
-            f"--train_batch_size={train_batch_size}", # Use local variable
-            f"--gradient_accumulation_steps={gradient_accumulation_steps}", # Use local variable
+            f"--train_batch_size={config.train_batch_size}", 
+            f"--gradient_accumulation_steps={config.gradient_accumulation_steps}", 
             f"--learning_rate={config.learning_rate}",
             f"--lr_scheduler={config.lr_scheduler}",
             f"--lr_warmup_steps={config.lr_warmup_steps}",
             f"--max_train_steps={config.max_train_steps}",
             f"--checkpointing_steps={config.checkpointing_steps}",
             f"--seed={config.seed}",  # increased reproducibility by seeding the RNG
+            "--gradient_checkpointing", # Trade compute for memory
         ]
         + (
             [
@@ -112,7 +110,7 @@ def train(config):
 
 @app.local_entrypoint()
 def main():
-    # run the function locally
+    # run the function remotely
     config = PostcardConfig()
     download_models.remote(config)
     train.remote(config)

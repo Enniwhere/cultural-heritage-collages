@@ -33,10 +33,12 @@ image = (
         "cd /root && git init .",
         "cd /root && git remote add origin https://github.com/huggingface/diffusers",
         f"cd /root && git fetch --depth=1 origin {GIT_SHA} && git checkout {GIT_SHA}",
+        # Patch the script to access config via .module when using DDP
+        "sed -i '1656s/transformer\.config/transformer\.module\.config/' /root/examples/dreambooth/train_dreambooth_lora_flux.py",
         "cd /root && pip install -e .",
     )
     .env({"HF_HUB_ENABLE_HF_TRANSFER": "1"})
-    .add_local_dir("./data/input/aerial_resized", remote_path="/root/data/input")
+    .add_local_dir("./data/input/postcards_resized", remote_path="/root/data/input")
 )
 
 volume = modal.Volume.from_name(

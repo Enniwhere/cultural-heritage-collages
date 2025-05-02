@@ -5,14 +5,14 @@ class BaseConfig:
     # identifier for pretrained models on Hugging Face
     model_name: str = "black-forest-labs/FLUX.1-dev"
     # Hyperparameters/constants from the huggingface training example
-    resolution: int = 512
-    train_batch_size: int = 8
+    resolution: int = 1024
+    train_batch_size: int = 4
     rank: int = 16  # lora rank
     gradient_accumulation_steps: int = 1
     learning_rate: float = 4e-4
     lr_scheduler: str = "constant"
     lr_warmup_steps: int = 0
-    max_train_steps: int = 500
+    max_train_steps: int = 750
     checkpointing_steps: int = 1000
     seed: int = 117
 
